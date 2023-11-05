@@ -4,6 +4,12 @@
     Please confirm your email address by clicking the following link: <br><br>
     <a href="{{ signedUrl }}">Confirm my Email</a>.
     This link will expire in {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
+
+    Data submitted in form:
+    Email: {{ user.email }} </br>
+    First name: {{ user.firstName }} </br>
+    Last name: {{ user.lastName }} </br>
+    Description: {{ user.description }} </br>
 </p>
 
 <p>
