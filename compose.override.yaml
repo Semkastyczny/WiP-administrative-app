@@ -1,13 +1,21 @@
-version: '3'
+version: "3"
 
 services:
-###> doctrine/doctrine-bundle ###
+  ###> doctrine/doctrine-bundle ###
   database:
     ports:
-      - "5432"
-###< doctrine/doctrine-bundle ###
+      - "6543:5432"
+  ###< doctrine/doctrine-bundle ###
 
-###> symfony/mailer ###
+  www:
+    build: .
+    ports:
+      - 8080:80
+    restart: always
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  ###> symfony/mailer ###
   mailer:
     image: schickling/mailcatcher
     ports: ["1025", "1080"]
