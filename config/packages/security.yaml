@@ -31,7 +31,6 @@ security:
   access_control:
     - { path: ^/login, roles: PUBLIC_ACCESS }
     - { path: ^/register, roles: PUBLIC_ACCESS }
-    - { path: ^/verify/email, roles: PUBLIC_ACCESS }
     - { path: ^/, roles: ROLE_USER }
     # - { path: ^/profile, roles: ROLE_USER }
 

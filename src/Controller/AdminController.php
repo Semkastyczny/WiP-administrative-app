@@ -3,8 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\UpdateFormType;
 use App\Repository\UserRepository;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,10 +30,17 @@ class AdminController extends AbstractController
      /**
      * @Route("/edit/{id}", name="edit")
      */
-    public function edit(User $user, Request $request, EntityManager $entityManager):Response
+    public function edit(int $id, Request $request, EntityManagerInterface $entityManager):Response
     {
+        $user = $entityManager->getRepository(User::class)->find($id);
+
+        if (!$user) {
+            throw $this->createNotFoundException(
+                'No user found for id '. $id
+            );
+        }
         
-        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form = $this->createForm(UpdateFormType::class, $user);
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
@@ -54,17 +62,25 @@ class AdminController extends AbstractController
 
         }
 
-
         return $this->render('admin/edit.html.twig', [
-            'user' => $user,
+            'updateForm' => $form->createView(),
+            'user' => $user
         ]);
     }
 
     /**
      * @Route("/delete/{id}", name="delete")
      */
-    public function delete(User $user, EntityManager $entityManager):Response
+    public function delete(int $id, EntityManagerInterface $entityManager):Response
     {
+        $user = $entityManager->getRepository(User::class)->find($id);
+        
+        if (!$user) {
+            throw $this->createNotFoundException(
+                'No user found for id '. $id
+            );
+        }
+        
         $entityManager->remove($user);
         $entityManager->flush();
 

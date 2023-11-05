@@ -39,6 +39,7 @@
         "symfony/twig-bundle": "5.4.*",
         "symfony/validator": "5.4.*",
         "symfony/web-link": "5.4.*",
+        "symfony/webpack-encore-bundle": "^1.17",
         "symfony/yaml": "5.4.*",
         "symfonycasts/verify-email-bundle": "^1.14",
         "twig/extra-bundle": "^2.12|^3.0",
@@ -90,7 +91,8 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "5.4.*"
+            "require": "5.4.*",
+            "endpoint": ["https://raw.githack.com/symfony/recipes/flex/main/index.json"]
         }
     },
     "require-dev": {

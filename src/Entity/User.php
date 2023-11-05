@@ -12,6 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @UniqueEntity(fields={"username"}, message="There is already an account with this username")
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -59,9 +60,55 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $isVerified = false;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $username;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=UserPosition::class, inversedBy="users")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $idPosition;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $testingSystems;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $raportingSystems;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default": false})
+     */
+    private $selenium = false;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $ideEnvironments;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $programmingLanguages;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true, options={"default": false})
+     */
+    private $mysql = false;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $methodologies;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true, options={"default": false})
+     */
+    private $scrum = false;
 
     public function getId(): ?int
     {
@@ -203,6 +250,114 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUsername(string $username): self
     {
         $this->username = $username;
+
+        return $this;
+    }
+
+    public function getIdPosition(): ?UserPosition
+    {
+        return $this->idPosition;
+    }
+
+    public function setIdPosition(?UserPosition $idPosition): self
+    {
+        $this->idPosition = $idPosition;
+
+        return $this;
+    }
+
+    public function getTestingSystems(): ?string
+    {
+        return $this->testingSystems;
+    }
+
+    public function setTestingSystems(?string $testingSystems): self
+    {
+        $this->testingSystems = $testingSystems;
+
+        return $this;
+    }
+
+    public function getRaportingSystems(): ?string
+    {
+        return $this->raportingSystems;
+    }
+
+    public function setRaportingSystems(?string $raportingSystems): self
+    {
+        $this->raportingSystems = $raportingSystems;
+
+        return $this;
+    }
+
+    public function isSelenium(): ?bool
+    {
+        return $this->selenium;
+    }
+
+    public function setSelenium(bool $selenium): self
+    {
+        $this->selenium = $selenium;
+
+        return $this;
+    }
+
+    public function getIdeEnvironments(): ?string
+    {
+        return $this->ideEnvironments;
+    }
+
+    public function setIdeEnvironments(?string $ideEnvironments): self
+    {
+        $this->ideEnvironments = $ideEnvironments;
+
+        return $this;
+    }
+
+    public function getProgrammingLanguages(): ?string
+    {
+        return $this->programmingLanguages;
+    }
+
+    public function setProgrammingLanguages(?string $programmingLanguages): self
+    {
+        $this->programmingLanguages = $programmingLanguages;
+
+        return $this;
+    }
+
+    public function isMysql(): ?bool
+    {
+        return $this->mysql;
+    }
+
+    public function setMysql(bool $mysql): self
+    {
+        $this->mysql = $mysql;
+
+        return $this;
+    }
+
+    public function getMethodologies(): ?string
+    {
+        return $this->methodologies;
+    }
+
+    public function setMethodologies(string $methodologies): self
+    {
+        $this->methodologies = $methodologies;
+
+        return $this;
+    }
+
+    public function isScrum(): ?bool
+    {
+        return $this->scrum;
+    }
+
+    public function setScrum(bool $scrum): self
+    {
+        $this->scrum = $scrum;
 
         return $this;
     }

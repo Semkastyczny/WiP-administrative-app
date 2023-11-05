@@ -9,12 +9,129 @@
 
     <h1>Update</h1>
 
-    {{ form_start(updateForm) }}
-        {{ form_row(updateForm.email) }}
-        {{ form_row(updateForm.firstName) }}
-        {{ form_row(updateForm.lastName) }}
-        {{ form_row(updateForm.description) }}
+    <form class="d-flex flex-column p-2 bd-highlight" action="{{ path('edit', {'id' : user.id}) }}" method="post">
+        <div class="mb-3 col-6">
+            {{ form_row(updateForm.username, {'attr': {'class' : 'form-control p-2'}, value : user.username}) }}
+        </div>
+        <div class="mb-3 col-6">
+            {{ form_row(updateForm.email, {'attr': {'class' : 'form-control p-2'}, value : user.email}) }}
+        </div>
+        <div class="mb-3 col-6">
+            {{ form_row(updateForm.firstName, {'attr': {'class' : 'form-control p-2'}, value : user.firstName}) }}
+        </div>
+        <div class="mb-3 col-6">
+            {{ form_row(updateForm.lastName, {'attr': {'class' : 'form-control p-2'}, value : user.lastName}) }}
+        </div>
+        <div class="mb-3 col-6">
+            <textarea class="form-control p-2" id="description" name="description">
+                {{user.description}}
+            </textarea>
+        </div>
+        <div class="mb-3 col-6">
+            {{ form_row(updateForm.idPosition, {'attr': {'class' : 'form-control p-2'}, value : user.idPosition}) }}
+        </div>
+        <div class="mb-3 col-6">
+            {{ form_row(updateForm.testingSystems, {'attr': {'class' : 'form-control p-2'}, value : user.testingSystems}) }}
+        </div>
+        <div class="mb-3 col-6">
+            {{ form_row(updateForm.raportingSystems, {'attr': {'class' : 'form-control p-2'}, value : user.raportingSystems}) }}
+        </div>
+        <div class="mb-3 col-6">
+            {{form_widget(updateForm.selenium, {value : user.selenium}) }}{{ form_label(updateForm.selenium)}}
+        </div>
+        <div class="mb-3 col-6">
+            {{ form_row(updateForm.ideEnvironments, {'attr': {'class' : 'form-control p-2'}, value : user.ideEnvironments}) }}
+        </div>
+        <div class="mb-3 col-6">
+            {{ form_row(updateForm.programmingLanguages, {'attr': {'class' : 'form-control p-2'}, value : user.programmingLanguages}) }}
+        </div>
+        <div class="mb-3 col-6">
+            {{form_widget(updateForm.mysql, {value : user.mysql}) }}{{ form_label(updateForm.mysql)}}
+        </div>
+        <div class="mb-3 col-6">
+            {{ form_row(updateForm.methodologies, {'attr': {'class' : 'form-control p-2'}, value : user.methodologies}) }}
+        </div>
+        <div class="mb-3 col-6">
+           {{form_widget(updateForm.scrum, {value : user.scrum}) }} {{ form_label(updateForm.scrum)}}
+        </div>
+        <button type="submit" class="btn btn-outline-success col-6">Update</button>
+    </form>
 
-        <button type="submit" class="btn">Update</button>
-    {{ form_end(updateForm) }}
+    <script>
+
+        
+
+        window.addEventListener("load", function(){
+            switchFormOptions();
+        });
+
+        document.getElementById('idPosition').addEventListener("change", switchFormOptions());
+
+        function switchFormOptions () {
+            var positionValue = document.getElementById('idPosition');
+            var testingSystems = document.getElementById('testingSystems');
+            var raportingSystems = document.getElementById('raportingSystems');
+            var selenium = document.getElementById('selenium');
+            var ideEnvironments = document.getElementById('ideEnvironments');
+            var programmingLanguages = document.getElementById('programmingLanguages');
+            var mysql = document.getElementById('mysql');
+            var methodologies = document.getElementById('methodologies');
+            var scrum = document.getElementById('scrum');
+            if (positionValue.value == 1) {
+
+                testingSystems.disabled = false;
+                testingSystems.parentElement.parentElement.style.display = "block";
+                raportingSystems.disabled = false;
+                raportingSystems.parentElement.parentElement.style.display = "block";
+                selenium.disabled = false;
+                selenium.parentElement.style.display = "block";
+                ideEnvironments.disabled = true;
+                ideEnvironments.parentElement.parentElement.style.display = "none";
+                programmingLanguages.disabled = true;
+                programmingLanguages.parentElement.parentElement.style.display = "none";
+                mysql.disabled = true;
+                mysql.parentElement.style.display = "none";
+                methodologies.disabled = true;
+                methodologies.parentElement.parentElement.style.display = "none";
+                scrum.disabled = true;
+                scrum.parentElement.style.display = "none";
+                
+            } else if (positionValue.value == 2) {
+                testingSystems.disabled = true;
+                testingSystems.parentElement.parentElement.style.display = "none";
+                raportingSystems.disabled = true;
+                raportingSystems.parentElement.parentElement.style.display = "none";
+                selenium.disabled = true;
+                selenium.parentElement.style.display = "none";
+                ideEnvironments.disabled = false;
+                ideEnvironments.parentElement.parentElement.style.display = "block";
+                programmingLanguages.disabled = false;
+                programmingLanguages.parentElement.parentElement.style.display = "block";
+                mysql.disabled = false;
+                mysql.parentElement.style.display = "block";
+                methodologies.disabled = true;
+                methodologies.parentElement.parentElement.style.display = "none";
+                scrum.disabled = true;
+                scrum.parentElement.style.display = "none";
+            } else if (positionValue.value == 3) {
+                testingSystems.disabled = true;
+                testingSystems.parentElement.parentElement.style.display = "none";
+                raportingSystems.disabled = false;
+                raportingSystems.parentElement.parentElement.style.display = "block";
+                selenium.disabled = true;
+                selenium.parentElement.style.display = "none";
+                ideEnvironments.disabled = true;
+                ideEnvironments.parentElement.parentElement.style.display = "none";
+                programmingLanguages.disabled = true;
+                programmingLanguages.parentElement.parentElement.style.display = "none";
+                mysql.disabled = true;
+                mysql.parentElement.style.display = "none";
+                methodologies.disabled = false;
+                methodologies.parentElement.parentElement.style.display = "block";
+                scrum.disabled = false;
+                scrum.parentElement.style.display = "block";
+            }
+        }
+
+    </script>
 {% endblock %}
