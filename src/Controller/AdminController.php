@@ -41,10 +41,10 @@ class AdminController extends AbstractController
             );
         }
 
-        if ($positionId = $request->query->get('idPosition', null)) {
-            $position = $entityManager->getRepository(UserPosition::class)->findById($positionId);
-            $user->setCategory($position);
-        }
+        // if ($positionId = $request->query->get('idPosition', null)) {
+        //     $position = $entityManager->getRepository(UserPosition::class)->findById($positionId);
+        //     $user->setCategory($position);
+        // }
 
         $form = $this->createForm(UpdateFormType::class, $user);
         $form->handleRequest($request);

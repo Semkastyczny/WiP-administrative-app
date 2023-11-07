@@ -64,13 +64,15 @@ class RegistrationFormType extends AbstractType
                         'maxMessage' => 'Description can contain max {{ limit }} characters'
                     ]),
                 ],
+                'empty_data' => '',
+                'required' => false,
             ])
             ->add('idPosition', EntityType::class, [
                 'class' => UserPosition::class,
                 'choice_label' => "Position",
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter choose a position',
+                        'message' => 'Please choose a position',
                     ]),
                 ],
             ])
@@ -81,6 +83,8 @@ class RegistrationFormType extends AbstractType
                         'maxMessage' => 'Testing systems can contain max {{ limit }} characters'
                     ]),
                 ],
+                'empty_data' => '',
+                'required' => false,
             ])
             ->add('raportingSystems', TextType::class, [
                 'constraints' => [
@@ -89,8 +93,12 @@ class RegistrationFormType extends AbstractType
                         'maxMessage' => 'Raporting systems can contain max {{ limit }} characters'
                     ]),
                 ],
+                'empty_data' => '',
+                'required' => false,
             ])
-            ->add('selenium', CheckboxType::class)
+            ->add('selenium', CheckboxType::class, [
+                'required' => false,
+            ])
             ->add('ideEnvironments', TextType::class, [
                 'constraints' => [
                     new Length([
@@ -98,6 +106,8 @@ class RegistrationFormType extends AbstractType
                         'maxMessage' => 'IDE environments can contain max {{ limit }} characters'
                     ]),
                 ],
+                'empty_data' => '',
+                'required' => false,
             ])
             ->add('programmingLanguages', TextType::class, [
                 'constraints' => [
@@ -106,8 +116,12 @@ class RegistrationFormType extends AbstractType
                         'maxMessage' => 'Programming languagess can contain max {{ limit }} characters'
                     ]),
                 ],
+                'empty_data' => '',
+                'required' => false,
             ])
-            ->add('mysql', CheckboxType::class)
+            ->add('mysql', CheckboxType::class, [
+                'required' => false,
+            ])
             ->add('methodologies', TextType::class, [
                 'constraints' => [
                     new Length([
@@ -115,8 +129,12 @@ class RegistrationFormType extends AbstractType
                         'maxMessage' => 'Methodologies can contain max {{ limit }} characters'
                     ]),
                 ],
+                'empty_data' => '',
+                'required' => false,
             ])
-            ->add('scrum', CheckboxType::class)
+            ->add('scrum', CheckboxType::class, [
+                'required' => false,
+            ])
         ;
     }
 

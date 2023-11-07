@@ -33,7 +33,7 @@ class UpdateFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('email', TextType::class, [
+            ->add('email', EmailType::class, [
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter an email',

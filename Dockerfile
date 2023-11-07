@@ -26,6 +26,6 @@ WORKDIR /var/www
  
 RUN composer install 
 RUN composer dump-autoload 
-
+# RUN php bin/console doctrine:migrations:migrate
 
 CMD ["apache2-foreground"]
