@@ -25,7 +25,7 @@ class UserPosition
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=User::class, mappedBy="id_position")
+     * @ORM\OneToMany(targetEntity=User::class, mappedBy="idPosition")
      */
     private $users;
 

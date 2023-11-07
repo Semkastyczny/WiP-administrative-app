@@ -69,6 +69,8 @@ class RegistrationController extends AbstractController
             );
 
             $response->statusCode = 200;
+        } else {
+            $response->errror = $form->getErrors(true)->__toString();
         }
 
         return new Response(json_encode($response), $response->statusCode);

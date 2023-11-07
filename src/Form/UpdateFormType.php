@@ -17,6 +17,8 @@ class UpdateFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+
+        // Consider moving this big form as SubscriberEvents? if there's more time (running low on it)
         $builder
             ->add('username', TextType::class, [
                 'constraints' => [
@@ -77,16 +79,12 @@ class UpdateFormType extends AbstractType
                         'maxMessage' => 'Description can contain max {{ limit }} characters'
                     ]),
                 ],
+                'empty_data' => '',
+                'required' => false,
             ])
             ->add('idPosition', EntityType::class, [
                 'class' => UserPosition::class,
-                'label' => 'Position',
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Please enter choose a position',
-                    ]),
-                ],
-
+                // 'label' => 'Position',
             ])
             ->add('testingSystems', TextType::class, [
                 'constraints' => [
@@ -95,6 +93,8 @@ class UpdateFormType extends AbstractType
                         'maxMessage' => 'Testing systems can contain max {{ limit }} characters'
                     ]),
                 ],
+                'empty_data' => '',
+                'required' => false,
             ])
             ->add('raportingSystems', TextType::class, [
                 'constraints' => [
@@ -103,8 +103,12 @@ class UpdateFormType extends AbstractType
                         'maxMessage' => 'Raporting systems can contain max {{ limit }} characters'
                     ]),
                 ],
+                'empty_data' => '',
+                'required' => false,
             ])
-            ->add('selenium', CheckboxType::class)
+            ->add('selenium', CheckboxType::class, [
+                'required' => false,
+            ])
             ->add('ideEnvironments', TextType::class, [
                 'constraints' => [
                     new Length([
@@ -112,6 +116,8 @@ class UpdateFormType extends AbstractType
                         'maxMessage' => 'IDE environments can contain max {{ limit }} characters'
                     ]),
                 ],
+                'empty_data' => '',
+                'required' => false,
             ])
             ->add('programmingLanguages', TextType::class, [
                 'constraints' => [
@@ -120,8 +126,12 @@ class UpdateFormType extends AbstractType
                         'maxMessage' => 'Programming languagess can contain max {{ limit }} characters'
                     ]),
                 ],
+                'empty_data' => '',
+                'required' => false,
             ])
-            ->add('mysql', CheckboxType::class)
+            ->add('mysql', CheckboxType::class, [
+                'required' => false,
+            ])
             ->add('methodologies', TextType::class, [
                 'constraints' => [
                     new Length([
@@ -129,8 +139,12 @@ class UpdateFormType extends AbstractType
                         'maxMessage' => 'Methodologies can contain max {{ limit }} characters'
                     ]),
                 ],
+                'empty_data' => '',
+                'required' => false,
             ])
-            ->add('scrum', CheckboxType::class)
+            ->add('scrum', CheckboxType::class, [
+                'required' => false,
+            ])
         ;
     }
 
@@ -142,11 +156,4 @@ class UpdateFormType extends AbstractType
         ]);
     }
 
-     /*
-    * @return string 
-    */
-    public function getBlockPrefix():string
-    {
-        return '';
-    }
 }

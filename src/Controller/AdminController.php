@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\UserPosition;
 use App\Form\UpdateFormType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -39,12 +40,14 @@ class AdminController extends AbstractController
                 'No user found for id '. $id
             );
         }
-        
-        $form = $this->createForm(UpdateFormType::class, $user);
 
-        if ($request->isMethod('POST')) {
-            $form->handleRequest($request);
+        if ($positionId = $request->query->get('idPosition', null)) {
+            $position = $entityManager->getRepository(UserPosition::class)->findById($positionId);
+            $user->setCategory($position);
         }
+
+        $form = $this->createForm(UpdateFormType::class, $user);
+        $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -53,18 +56,11 @@ class AdminController extends AbstractController
 
             return $this->redirectToRoute("homepage");
 
-        } else if ($form->isSubmitted()) {
-
-            $this->addFlash(
-                'error',
-                'Your changes were not saved'
-            );
-
         }
 
         return $this->render('admin/edit.html.twig', [
             'updateForm' => $form->createView(),
-            'user' => $user
+            'user' => $user,
         ]);
     }
 

@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Entity\UserPosition;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -73,23 +74,49 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            // ->add('plainPassword', PasswordType::class, [
-            //     // instead of being set onto the object directly,
-            //     // this is read and encoded in the controller
-            //     'mapped' => false,
-            //     'attr' => ['autocomplete' => 'new-password'],
-            //     'constraints' => [
-            //         new NotBlank([
-            //             'message' => 'Please enter a password',
-            //         ]),
-            //         new Length([
-            //             'min' => 6,
-            //             'minMessage' => 'Your password should be at least {{ limit }} characters',
-            //             // max length allowed by Symfony for security reasons
-            //             'max' => 254,
-            //         ]),
-            //     ],
-            // ])
+            ->add('testingSystems', TextType::class, [
+                'constraints' => [
+                    new Length([
+                        'max' => 254,
+                        'maxMessage' => 'Testing systems can contain max {{ limit }} characters'
+                    ]),
+                ],
+            ])
+            ->add('raportingSystems', TextType::class, [
+                'constraints' => [
+                    new Length([
+                        'max' => 254,
+                        'maxMessage' => 'Raporting systems can contain max {{ limit }} characters'
+                    ]),
+                ],
+            ])
+            ->add('selenium', CheckboxType::class)
+            ->add('ideEnvironments', TextType::class, [
+                'constraints' => [
+                    new Length([
+                        'max' => 254,
+                        'maxMessage' => 'IDE environments can contain max {{ limit }} characters'
+                    ]),
+                ],
+            ])
+            ->add('programmingLanguages', TextType::class, [
+                'constraints' => [
+                    new Length([
+                        'max' => 254,
+                        'maxMessage' => 'Programming languagess can contain max {{ limit }} characters'
+                    ]),
+                ],
+            ])
+            ->add('mysql', CheckboxType::class)
+            ->add('methodologies', TextType::class, [
+                'constraints' => [
+                    new Length([
+                        'max' => 254,
+                        'maxMessage' => 'Methodologies can contain max {{ limit }} characters'
+                    ]),
+                ],
+            ])
+            ->add('scrum', CheckboxType::class)
         ;
     }
 
