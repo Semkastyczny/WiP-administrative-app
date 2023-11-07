@@ -13,3 +13,5 @@ docker exec -it {{docker_www_image_name}} php bin/console doctrine:migrations:mi
 
 That's it! Application should be running by now.
 To access mails, just type localhost:1080 in your browser.
+
+Access Symfony CMS app via url https://localhost:8080
